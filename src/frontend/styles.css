@@ -132,6 +132,14 @@ div.controls-row {
   margin-bottom: 10px;
 }
 
+.not-logged-in button:hover {
+  background: #f0f0f0;
+}
+
+.not-logged-in button:active {
+  background: #e0e0e0;
+}
+
 .journey-map-container {
   height: 200px;
   width: 100%;
@@ -145,6 +153,10 @@ div.controls-row {
 .journey-map-container h1 {
   opacity: 0.5;
   font-size: 44px;
+}
+
+button {
+  cursor: pointer;
 }
 
 body {
