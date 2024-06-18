@@ -1,24 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Application</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Welcome to My Web Application</h1>
-    </header>
-    <main>
-        <section>
-            <p>This is a simple test HTML file to get you
-               started with your project.</p>
-            <button id="testButton">Click Me</button>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 My Web Application</p>
-    </footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SBahn Planner</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" defer type="module"></script>
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="hvv-map-container">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqAYtrybb-aPFO19bsq8zepfsDoQToODRFaA&s"
+          class="sbahn-logo"
+        >
+        <img
+          src="https://assets.static-bahn.de/dam/jcr:eaeec4ee-17b1-4067-b521-582ee146f12b/S-Bahn-Netz_ab_Dezember.png"
+          class="map"
+        >
+      </div>
+
+      <div class="controls">
+
+        <div class="controls-row">
+          <div class="start-end-container">
+
+            <div class="start-end-deco"></div>
+            <div class="start-end-fields-container">
+              <input
+                type="text"
+                class="start-end-field"
+                id="start"
+                placeholder="Starting..."
+              />
+              <input
+                type="text"
+                class="start-end-field"
+                id="end"
+                placeholder="Going To..."
+              />
+            </div>
+          </div>
+
+          <div class="previous-trips-container">
+            <div class="not-logged-in">
+              <p>Log in to retain previous journeys</p>
+              <button class="login-button">sign in</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="controls-row">
+          <div class="journey-map-container">
+            <h1>
+              No journey planned yet
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

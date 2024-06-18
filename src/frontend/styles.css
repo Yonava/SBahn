@@ -1,0 +1,154 @@
+.hvv-map-container {
+  width: 61%;
+  height: calc(60% - 10px);
+  overflow: hidden;
+  position: relative;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  scale: 1.2;
+  object-fit: cover;
+  position: absolute;
+}
+
+.sbahn-logo {
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 5%;
+  left: 0;
+  z-index: 2;
+  mix-blend-mode: multiply;
+}
+
+div.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  postion: relative;
+  flex-direction: column;
+}
+
+div.controls {
+  height: calc(40% - 10px);
+  display: flex;
+  flex-direction: column;
+  background: #008D4F;
+  padding: 10px;
+  border-radius: 10px 10px 0px 0px;
+  position: relative;
+  gap: 10px;
+  width: 60%;
+}
+
+div.controls-row {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.start-end-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: #009D58;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.start-end-deco {
+  width: 20px;
+  height: calc(100% - 20px);
+  background: white;
+  border-radius: 50px;
+}
+
+.start-end-fields-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.start-end-field {
+  width: 350px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 50px;
+  border: 0px;
+  padding-left: 16px;
+  font-size: 16px;
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.25);
+  font-weight: 600;
+}
+
+.previous-trips-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  width: 500px;
+}
+
+.not-logged-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  width: 300px;
+  gap: 20px;
+}
+
+.not-logged-in p {
+  color: white;
+  opacity: 0.75;
+  font-weight: 900;
+  font-size: 26px;
+  text-align: center;
+  margin: 0;
+}
+
+.not-logged-in button {
+  background: white;
+  font-weight: 900;
+  font-size: 26px;
+  text-align: center;
+  border: 0px;
+  border-radius: 10px;
+  padding: 10px 50px;
+  margin-bottom: 10px;
+}
+
+.journey-map-container {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  background: #eee;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.journey-map-container h1 {
+  opacity: 0.5;
+  font-size: 44px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
