@@ -1,5 +1,6 @@
 .hvv-map-container {
   width: 61%;
+  max-width: 1000px;
   height: calc(60% - 10px);
   overflow: hidden;
   position: relative;
@@ -49,6 +50,7 @@ div.controls-row {
   justify-content: space-between;
   position: relative;
   width: 100%;
+  height: 200px;
 }
 
 .start-end-container {
@@ -80,7 +82,7 @@ div.controls-row {
 }
 
 .start-end-field {
-  width: 350px;
+  width: 400px;
   height: 40px;
   margin: 10px;
   border-radius: 50px;
@@ -110,6 +112,43 @@ div.controls-row {
   border-radius: 10px;
   width: 300px;
   gap: 20px;
+}
+
+.past-trips {
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.past-trips-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  height: 120px;
+}
+
+.past-trip-card {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 8px;
+  color: black;
+  border: 2px solid transparent;
+}
+
+.past-trip-card:hover {
+  background: #f0f0f0;
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
 }
 
 .not-logged-in p {
