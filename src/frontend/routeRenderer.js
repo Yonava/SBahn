@@ -1,4 +1,5 @@
 import { SBahn } from './sbahn.js'
+import { isStationImportant } from './stations.js';
 // format:
 // route = [
 //   {
@@ -12,8 +13,30 @@ import { SBahn } from './sbahn.js'
  * @returns {HTMLDivElement}
  * @example renderRoute([{station: 'Blankenese', line: SBahn.S1}])
  */
-const renderRoute = (route) => {
+export const renderRoute = (route) => {
   const parentDiv = document.createElement('div');
 
-  for (const { station, line } of route) {}
+  parentDiv.className = 'route';
+
+  for (const { station, line } of route) {
+    const stationDiv = document.createElement('div');
+    stationDiv.className = 'station';
+
+    const stationNotch = document.createElement('div');
+    stationNotch.className = 'station-notch';
+    stationNotch.classList.add(`bg-${line.toLowerCase()}`);
+    stationDiv.appendChild(stationNotch);
+
+    const stationName = document.createElement('div');
+    stationName.className = 'station-name';
+    if (isStationImportant(station)) {
+      stationName.style.fontWeight = 'bold';
+    }
+    stationName.textContent = station;
+    stationDiv.appendChild(stationName);
+
+    parentDiv.appendChild(stationDiv);
+  }
+
+  return parentDiv;
 }

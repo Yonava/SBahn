@@ -183,7 +183,7 @@ p {
   height: 200px;
   width: 100%;
   display: flex;
-  background: #eee;
+  background: white;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
@@ -192,6 +192,61 @@ p {
 .journey-map-container h1 {
   opacity: 0.5;
   font-size: 44px;
+}
+
+.route {
+  transform: rotate(270deg);
+}
+
+.station {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.station-notch {
+  width: 11px;
+  height: 15px;
+  position: relative;
+}
+
+.station-notch::before {
+  content: '';
+  width: 20px;
+  height: 13px;
+  position: absolute;
+  top: -13px;
+  background: inherit;
+}
+
+.station-notch::after {
+  content: '';
+  width: 20px;
+  height: 13px;
+  position: absolute;
+  bottom: -13px;
+  background: inherit;
+}
+
+.station-name {
+  padding: 10px 0px;
+  transform: rotate(10deg) translate(7px, 5px);
+}
+
+.bg-s1 {
+  background: #009D58;
+}
+
+.bg-s2 {
+  background: #008D4F;
+}
+
+.bg-s3 {
+  background: #007D44;
+}
+
+.bg-s5 {
+  background: #006D39;
 }
 
 button {

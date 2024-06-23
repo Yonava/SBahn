@@ -117,3 +117,11 @@ export const stations = {
     { name: 'Stade', time: 0 },
   ]
 }
+
+export const importantStations = [
+  'Blankenese',
+  'Altona',
+  'Hauptbahnhof',
+]
+
+export const isStationImportant = (station) => importantStations.includes(station)
