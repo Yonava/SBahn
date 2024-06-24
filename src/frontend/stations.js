@@ -2,6 +2,7 @@
 // Stations
 // - name: string station name
 // - time: time it takes to get to the next station on the line in minutes
+import { SBahn } from './sbahn';
 
 const cityMainTunnel = [
   { name: 'Altona', time: 2 },
@@ -126,13 +127,30 @@ export const lineStationSet = {
   s5: new Set(stations.s5.map(station => station.name)),
 }
 
+export const sbahnLinesToSBahn = {
+  s1a: SBahn.S1,
+  s1p: SBahn.S1,
+  s2: SBahn.S2,
+  s3: SBahn.S3,
+  s5: SBahn.S5,
+}
+
+export const stationToLine = Object.entries(stations).reduce((acc, [line, stations]) => {
+  const realLineName = sbahnLinesToSBahn[line]
+  return stations.reduce((_, { name }) => {
+    const prevLines = acc.get(name) ?? []
+    const newLines = [...new Set([...prevLines, realLineName])]
+    return acc.set(name, newLines)
+  }, acc)
+}, new Map())
+
 // undirected graph adjacency list representation of the stations
 export const graph = Object
   .values(stations)
   .reduce((adjMap, line) => line.reduce((acc, { name }, i, arr) => {
     const nextStation = arr[i + 1]
     const prevStation = arr[i - 1]
-    const stations = acc.get(name) || []
+    const stations = acc.get(name) ?? []
     const newStations = [
       ...stations,
       nextStation?.name,

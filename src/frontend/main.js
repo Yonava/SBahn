@@ -1,7 +1,6 @@
 import { renderRoute } from "./routeRenderer";
-import { stations } from "./stations";
-import { SBahn } from "./sbahn";
 import { getShortestHVVPath } from "./traverse";
+import { localKeys } from "./locals";
 
 const mockUser = {
   id: 1,
@@ -9,11 +8,11 @@ const mockUser = {
   trips: [
     {
     origin: 'Blankenese',
-    destination: 'Hauptbahnhof',
+    destination: 'Pinneberg',
     duration: '30 minutes'
   },
   {
-    origin: 'Blankenese',
+    origin: 'Berliner Tor',
     destination: 'Hauptbahnhof',
     duration: '30 minutes'
   },
@@ -29,6 +28,9 @@ const mockUser = {
   }
 ]
 }
+
+const originInput = document.getElementById('start');
+const destinationInput = document.getElementById('end');
 
 const loginBtn = document.querySelector('.login-button');
 
@@ -50,6 +52,11 @@ const pastTripsContent = (trips) => {
     <h3>${trip.origin} - ${trip.destination}</h3>
     <p>Duration: ${trip.duration}</p>
     `
+    tripDiv.addEventListener('click', () => {
+      originInput.value = trip.origin;
+      destinationInput.value = trip.destination;
+      setRoute(trip.origin, trip.destination);
+    });
     cardContainer.appendChild(tripDiv);
   });
 
@@ -68,14 +75,18 @@ loginBtn.addEventListener('click', () => {
   login(mockUser);
 });
 
-const { s2 } = stations;
-const mockRoute = s2.map(({ name }) => ({ station: name, line: SBahn.S2 }));
-
 const setRoute = (origin, destination) => {
   const route = getShortestHVVPath(origin, destination);
+  if (!route.length) return console.warn('No route found.');
   const routeContainer = document.querySelector('.journey-map-container');
   routeContainer.innerHTML = '';
   routeContainer.appendChild(renderRoute(route));
 }
 
-setRoute('Altona', 'Hauptbahnhof');
+originInput.addEventListener('keyup', (e) => {
+  setRoute(e.target.value, destinationInput.value);
+});
+
+destinationInput.addEventListener('keyup', (e) => {
+  setRoute(originInput.value, e.target.value);
+});
