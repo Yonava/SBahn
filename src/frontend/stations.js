@@ -118,10 +118,39 @@ export const stations = {
   ]
 }
 
+export const lineStationSet = {
+  s1a: new Set(stations.s1a.map(station => station.name)),
+  s1p: new Set(stations.s1p.map(station => station.name)),
+  s2: new Set(stations.s2.map(station => station.name)),
+  s3: new Set(stations.s3.map(station => station.name)),
+  s5: new Set(stations.s5.map(station => station.name)),
+}
+
+// undirected graph adjacency list representation of the stations
+export const graph = Object
+  .values(stations)
+  .reduce((adjMap, line) => line.reduce((acc, { name }, i, arr) => {
+    const nextStation = arr[i + 1]
+    const prevStation = arr[i - 1]
+    const stations = acc.get(name) || []
+    const newStations = [
+      ...stations,
+      nextStation?.name,
+      prevStation?.name
+    ].filter(Boolean)
+    return acc.set(name, [...new Set(newStations)])
+  }, adjMap), new Map())
+
 export const importantStations = [
   'Blankenese',
   'Altona',
   'Hauptbahnhof',
+  'Hamburg Airport',
+  'Wedel',
+  'Pinneberg',
+  'Stade',
+  'Neugraben',
+  'Poppenbüttel',
 ]
 
 export const isStationImportant = (station) => importantStations.includes(station)

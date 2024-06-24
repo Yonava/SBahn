@@ -1,4 +1,7 @@
 import { renderRoute } from "./routeRenderer";
+import { stations } from "./stations";
+import { SBahn } from "./sbahn";
+import { getShortestHVVPath } from "./traverse";
 
 const mockUser = {
   id: 1,
@@ -65,41 +68,14 @@ loginBtn.addEventListener('click', () => {
   login(mockUser);
 });
 
-const mockRoute = [
-  {
-    station: 'Blankenese',
-    line: 'S1'
-  },
-  {
-    station: 'Altona',
-    line: 'S1'
-  },
-  {
-    station: 'Königstraße',
-    line: 'S1'
-  },
-  {
-    station: 'Reeperbahn',
-    line: 'S1'
-  },
-  {
-    station: 'Landungsbrücken',
-    line: 'S1'
-  },
-  {
-    station: 'Stadthausbrücke',
-    line: 'S1'
-  },
-  {
-    station: 'Jungfernstieg',
-    line: 'S1'
-  },
-  {
-    station: 'Hauptbahnhof',
-    line: 'S1'
-  }
-]
+const { s2 } = stations;
+const mockRoute = s2.map(({ name }) => ({ station: name, line: SBahn.S2 }));
 
-const routeContainer = document.querySelector('.journey-map-container');
-routeContainer.innerHTML = '';
-routeContainer.appendChild(renderRoute(mockRoute));
+const setRoute = (origin, destination) => {
+  const route = getShortestHVVPath(origin, destination);
+  const routeContainer = document.querySelector('.journey-map-container');
+  routeContainer.innerHTML = '';
+  routeContainer.appendChild(renderRoute(route));
+}
+
+setRoute('Altona', 'Hauptbahnhof');
