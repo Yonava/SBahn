@@ -1,7 +1,7 @@
 import { setRoute } from './setRoute.js';
 import { localKeys } from './locals.js';
 import { getUserByName, createUser } from './api.js';
-import { loginObserver, tripObserver } from './observers.js';
+import { loginObserver, tripObserver, logoutObserver } from './observers.js';
 
 export const login = async (username) => {
   const user = await getUserByName(username);
@@ -58,6 +58,33 @@ export const loggedInView = (trips) => {
   render();
 
   tripObserver.subscribe(addTrip);
+}
+
+export const logout = () => {
+  localStorage.removeItem(localKeys.username);
+  renderLoggedOutView();
+  logoutObserver.notify();
+}
+
+const renderLoggedOutView = () => {
+  const prevTripsDiv = document.querySelector('.previous-trips-container');
+  prevTripsDiv.innerHTML = '';
+
+  const originInput = document.getElementById('start');
+  const destinationInput = document.getElementById('end');
+  originInput.value = '';
+  destinationInput.value = '';
+
+  const notLoggedInDiv = document.createElement('div');
+  notLoggedInDiv.className = 'not-logged-in';
+  notLoggedInDiv.innerHTML = `
+    <p>Log in to retain previous journeys</p>
+    <button class="login-button">sign in</button>
+  `;
+  const loginBtn = notLoggedInDiv.querySelector('.login-button');
+  const toggleModal = initLoginModal();
+  loginBtn.addEventListener('click', toggleModal);
+  prevTripsDiv.appendChild(notLoggedInDiv);
 }
 
 export const initLoginModal = () => {

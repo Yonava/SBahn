@@ -307,3 +307,24 @@ body {
 .login-modal button:active {
   background: #007D40;
 }
+
+.logout-button {
+  background: #B81842;
+  color: white;
+  border: 0px;
+  border-radius: 10px;
+  padding: 10px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  top: 30px;
+  right: 10px;
+  position: absolute;
+}
+
+.logout-button:hover {
+  background: #A80832;
+}
+
+.logout-button:active {
+  background: #970822;
+}

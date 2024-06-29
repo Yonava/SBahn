@@ -1,11 +1,7 @@
-import { login, initLoginModal } from "./login";
+import './logoutBtn';
+import { login, logout } from "./login";
 import { localKeys } from "./locals";
 import { setRoute } from "./setRoute";
-
-const loginBtn = document.querySelector('.login-button');
-
-const renderLoginModal = initLoginModal();
-loginBtn.addEventListener('click', renderLoginModal);
 
 const originInput = document.getElementById('start');
 const destinationInput = document.getElementById('end');
@@ -30,4 +26,6 @@ if (currentOrigin && currentDestination) {
 const loggedInUser = localStorage.getItem(localKeys.username);
 if (loggedInUser) {
   login(loggedInUser);
+} else {
+  logout();
 }
