@@ -17,8 +17,8 @@ const mockUser = {
     duration: '30 minutes'
   },
   {
-    origin: 'Blankenese',
-    destination: 'Hauptbahnhof',
+    origin: 'Harburg Rathaus',
+    destination: 'Bergedorf',
     duration: '30 minutes'
   },
   {
@@ -66,9 +66,10 @@ const pastTripsContent = (trips) => {
 
 const login = (user) => {
   const prevTripsDiv = document.querySelector('.previous-trips-container');
-  console.log(`Welcome ${user.name}`);
+  alert(`Welcome ${user.name}`);
   prevTripsDiv.innerHTML = '';
   prevTripsDiv.appendChild(pastTripsContent(user.trips));
+  localStorage.setItem(localKeys.loggedInUser, JSON.stringify(user));
 }
 
 loginBtn.addEventListener('click', () => {
@@ -81,6 +82,8 @@ const setRoute = (origin, destination) => {
   const routeContainer = document.querySelector('.journey-map-container');
   routeContainer.innerHTML = '';
   routeContainer.appendChild(renderRoute(route));
+  localStorage.setItem(localKeys.currentOrigin, origin);
+  localStorage.setItem(localKeys.currentDestination, destination);
 }
 
 originInput.addEventListener('keyup', (e) => {
@@ -90,3 +93,17 @@ originInput.addEventListener('keyup', (e) => {
 destinationInput.addEventListener('keyup', (e) => {
   setRoute(originInput.value, e.target.value);
 });
+
+const currentOrigin = localStorage.getItem(localKeys.currentOrigin);
+const currentDestination = localStorage.getItem(localKeys.currentDestination);
+
+if (currentOrigin && currentDestination) {
+  originInput.value = currentOrigin;
+  destinationInput.value = currentDestination;
+  setRoute(currentOrigin, currentDestination);
+}
+
+const loggedInUser = localStorage.getItem(localKeys.loggedInUser);
+if (loggedInUser) {
+  login(JSON.parse(loggedInUser));
+}

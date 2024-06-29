@@ -1,4 +1,3 @@
-import { SBahn } from './sbahn.js'
 import { isStationImportant } from './stations.js';
 // format:
 // route = [
