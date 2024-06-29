@@ -29,7 +29,7 @@ div.container {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  postion: relative;
+  position: relative;
   flex-direction: column;
 }
 
@@ -187,6 +187,8 @@ p {
   border-radius: 10px;
   justify-content: center;
   align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .journey-map-container h1 {

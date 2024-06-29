@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SBahn Planner</title>
+    <script type="module" crossorigin src="/assets/index-BzGFG3Sh.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-9G_1KXCp.css">
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="hvv-map-container">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqAYtrybb-aPFO19bsq8zepfsDoQToODRFaA&s"
+          class="sbahn-logo"
+        >
+        <img
+          src="https://assets.static-bahn.de/dam/jcr:eaeec4ee-17b1-4067-b521-582ee146f12b/S-Bahn-Netz_ab_Dezember.png"
+          class="map"
+        >
+      </div>
+
+      <div class="controls">
+
+        <div class="controls-row">
+          <div class="start-end-container">
+
+            <div class="start-end-deco"></div>
+            <div class="start-end-fields-container">
+              <input
+                type="text"
+                class="start-end-field"
+                id="start"
+                placeholder="Starting..."
+              />
+              <input
+                type="text"
+                class="start-end-field"
+                id="end"
+                placeholder="Going To..."
+              />
+            </div>
+          </div>
+
+          <div class="previous-trips-container">
+            <!-- auto-injected with js -->
+          </div>
+
+        </div>
+        <div class="controls-row">
+          <div class="journey-map-container">
+            <h1>
+              No journey planned yet
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

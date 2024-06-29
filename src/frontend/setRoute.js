@@ -30,6 +30,6 @@ export const setRoute = (origin, destination, postRoute = true) => {
   tripObserver.notify(trip);
 
   postTrip(trip)
-    .then(() => console.log('Trip saved.'))
+    .then((data) => console.log(data))
     .catch(err => console.error(err));
 }

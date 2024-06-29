@@ -4,6 +4,7 @@ const router = express.Router();
 
 // get all users
 router.get('/', async (req, res) => {
+  console.log('getting all users');
   const users = await User.find();
   res.send(users);
 });

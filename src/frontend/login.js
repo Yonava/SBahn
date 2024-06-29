@@ -61,7 +61,7 @@ export const loggedInView = (trips) => {
 }
 
 export const logout = () => {
-  localStorage.removeItem(localKeys.username);
+  localStorage.clear();
   renderLoggedOutView();
   logoutObserver.notify();
 }
@@ -69,11 +69,6 @@ export const logout = () => {
 const renderLoggedOutView = () => {
   const prevTripsDiv = document.querySelector('.previous-trips-container');
   prevTripsDiv.innerHTML = '';
-
-  const originInput = document.getElementById('start');
-  const destinationInput = document.getElementById('end');
-  originInput.value = '';
-  destinationInput.value = '';
 
   const notLoggedInDiv = document.createElement('div');
   notLoggedInDiv.className = 'not-logged-in';

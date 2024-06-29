@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { localKeys } from './locals';
 
-const USERS_URL = 'http://localhost:3000/users';
+const USERS_URL = 'http://localhost:3000/api/users';
 
 export const getUserByName = async (name) => {
   console.log('username', name)
@@ -17,7 +17,7 @@ export const createUser = async (user) => {
 
 export const postTrip = async (trip) => {
   const username = localStorage.getItem(localKeys.username);
-  if (!username) return console.warn('User not logged in. Cannot save trip.');
+  if (!username) return 'User not logged in. Cannot save trip.';
   const response = await axios.post(`${USERS_URL}/${username}`, trip);
   return response.data;
 }

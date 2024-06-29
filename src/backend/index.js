@@ -12,7 +12,12 @@ const { MONGO_URI } = process.env;
 
 mongoose.connect(MONGO_URI);
 
-app.use('/users', users);
+app.use('/api/users', users);
+
+// app.use(express.static(__dirname + '/public/'));
+// app.get(/.*/, (req, res) => {
+//   res.sendFile(__dirname + '/public/index.html');
+// });
 
 const PORT = process.env.PORT || 3000;
 
