@@ -17,7 +17,7 @@ export const createUser = async (user) => {
 
 export const postTrip = async (trip) => {
   const username = localStorage.getItem(localKeys.username);
-  if (!username) return console.warn('User not logged in.');
+  if (!username) return console.warn('User not logged in. Cannot save trip.');
   const response = await axios.post(`${URL}/${username}`, trip);
   return response.data;
 }

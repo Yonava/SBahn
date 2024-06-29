@@ -272,6 +272,7 @@ body {
   z-index: 100;
   opacity: 0;
   transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 .login-modal {
