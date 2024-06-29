@@ -4,7 +4,14 @@ import { localKeys } from './locals';
 const URL = 'http://localhost:3000';
 
 export const getUserByName = async (name) => {
+  console.log('username', name)
   const response = await axios.get(`${URL}/users/${name}`);
+  return response.data;
+}
+
+export const createUser = async (user) => {
+  console.log('user', user)
+  const response = await axios.post(`${URL}/users`, user);
   return response.data;
 }
 

@@ -30,14 +30,15 @@ const mockUsers = [{
 }]
 
 export const login = async (username) => {
-  const user = await getUserById(username);
-  if (!user) return console.warn('User not found.');
+  const user = await getUserByName(username);
+  if (!user) return;
   console.log('user found', user);
   const prevTripsDiv = document.querySelector('.previous-trips-container');
   prevTripsDiv.innerHTML = '';
   const loggedInViewContent = loggedInView(user.trips);
   prevTripsDiv.appendChild(loggedInViewContent);
   localStorage.setItem(localKeys.username, username);
+  return user;
 }
 
 const loggedInView = (trips) => {
@@ -101,7 +102,14 @@ export const initLoginModal = () => {
       input.focus();
       return;
     }
-    login(username);
+    const loggedInUser = await login(username);
+    if (!loggedInUser) {
+      await createUser({
+        name: username,
+        trips: []
+      })
+      login(username);
+    }
     toggleModal();
   });
   modal.appendChild(submitBtn);
