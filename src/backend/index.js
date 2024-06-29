@@ -1,12 +1,16 @@
 const express = require('express');
 const users = require('./users');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/sbahn', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+app.use(cors());
+app.use(express.json());
+
+const { MONGO_URI } = process.env;
+
+mongoose.connect(MONGO_URI);
 
 app.use('/users', users);
 

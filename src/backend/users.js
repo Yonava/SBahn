@@ -10,22 +10,27 @@ router.get('/', async (req, res) => {
 
 // get a user by name
 router.get('/:name', async (req, res) => {
+  console.log('getting user', req.params.name);
   const { name } = req.params;
   const user = await User.findOne({ name });
+  console.log('user found', user);
   res.send(user);
 });
 
 // create a new user
 router.post('/', async (req, res) => {
+  console.log('creating user', req.body);
   const user = new User(req.body);
   await user.save();
   res.send(user);
 });
 
 // add a trip to a user
-router.post('/:id', async (req, res) => {
-  const user = await User.findById(req.params.id);
-  user.trips.push(req.body);
+router.post('/:name', async (req, res) => {
+  console.log('adding trip to user', req.params.name, req.body);
+  const { name } = req.params;
+  const user = await User.findOne({ name });
+  user.trips.unshift(req.body);
   await user.save();
   res.send(user);
 });

@@ -1,77 +1,63 @@
 import { setRoute } from './setRoute.js';
 import { localKeys } from './locals.js';
-import { getUserByName } from './api.js';
-
-const mockUsers = [{
-  id: 1,
-  name: 'Yona',
-  trips: [
-    {
-      origin: 'Blankenese',
-      destination: 'Pinneberg',
-      duration: '30 minutes'
-    },
-    {
-      origin: 'Berliner Tor',
-      destination: 'Hauptbahnhof',
-      duration: '30 minutes'
-    },
-    {
-      origin: 'Harburg Rathaus',
-      destination: 'Bergedorf',
-      duration: '30 minutes'
-    },
-    {
-      origin: 'Blankenese',
-      destination: 'Hauptbahnhof',
-      duration: '30 minutes'
-    }
-  ]
-}]
+import { getUserByName, createUser } from './api.js';
+import { loginObserver, tripObserver } from './observers.js';
 
 export const login = async (username) => {
   const user = await getUserByName(username);
   if (!user) return;
   console.log('user found', user);
-  const prevTripsDiv = document.querySelector('.previous-trips-container');
-  prevTripsDiv.innerHTML = '';
-  const loggedInViewContent = loggedInView(user.trips);
-  prevTripsDiv.appendChild(loggedInViewContent);
   localStorage.setItem(localKeys.username, username);
+  loggedInView(user.trips);
+  loginObserver.notify(user);
   return user;
 }
 
-const loggedInView = (trips) => {
-  const parentDiv = document.createElement('div');
-  parentDiv.className = 'past-trips';
+export const loggedInView = (trips) => {
+  const render = () => {
+    const prevTripsDiv = document.querySelector('.previous-trips-container');
+    prevTripsDiv.innerHTML = '';
 
-  const title = document.createElement('h1');
-  title.textContent = 'Previous Trips';
-  parentDiv.appendChild(title);
+    const parentDiv = document.createElement('div');
+    parentDiv.className = 'past-trips';
 
-  const cardContainer = document.createElement('div');
-  cardContainer.className = 'past-trips-card-container';
+    const title = document.createElement('h1');
+    title.textContent = `Previous Trips (${trips.length})`;
+    parentDiv.appendChild(title);
 
-  const originInput = document.getElementById('start');
-  const destinationInput = document.getElementById('end');
+    const cardContainer = document.createElement('div');
+    cardContainer.className = 'past-trips-card-container';
 
-  trips.forEach(trip => {
-    const tripDiv = document.createElement('div');
-    tripDiv.className = 'past-trip-card';
-    tripDiv.innerHTML = `
+    const originInput = document.getElementById('start');
+    const destinationInput = document.getElementById('end');
+
+    trips.forEach(trip => {
+      const tripDiv = document.createElement('div');
+      tripDiv.className = 'past-trip-card';
+      tripDiv.innerHTML = `
     <h3>${trip.origin} - ${trip.destination}</h3>
-    <p>Duration: ${trip.duration}</p>
+    <p>Duration: ${trip.duration} minutes</p>
     `
-    tripDiv.addEventListener('click', () => {
-      originInput.value = trip.origin;
-      destinationInput.value = trip.destination;
-      setRoute(trip.origin, trip.destination);
+      tripDiv.addEventListener('click', () => {
+        originInput.value = trip.origin;
+        destinationInput.value = trip.destination;
+        setRoute(trip.origin, trip.destination, false);
+      });
+      cardContainer.appendChild(tripDiv);
     });
-    cardContainer.appendChild(tripDiv);
-  });
 
-  parentDiv.appendChild(cardContainer);
-  return parentDiv;
+    parentDiv.appendChild(cardContainer);
+    prevTripsDiv.appendChild(parentDiv);
+  }
+
+  const addTrip = (trip) => {
+    trips.unshift(trip);
+    render();
+  }
+
+  render();
+
+  tripObserver.subscribe(addTrip);
 }
 
 export const initLoginModal = () => {

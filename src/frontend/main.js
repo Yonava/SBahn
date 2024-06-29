@@ -24,7 +24,7 @@ const currentDestination = localStorage.getItem(localKeys.currentDestination);
 if (currentOrigin && currentDestination) {
   originInput.value = currentOrigin;
   destinationInput.value = currentDestination;
-  setRoute(currentOrigin, currentDestination);
+  setRoute(currentOrigin, currentDestination, false);
 }
 
 const loggedInUser = localStorage.getItem(localKeys.username);
